@@ -46,8 +46,8 @@ mongoose
     });
 
 // routes
-app.use(restaurantRoutes);
-app.use(filterRoutes);
+app.use("/api", restaurantRoutes);
+app.use("/api", filterRoutes);
 
 // error route
 app.use((error, req, res, next) => {
