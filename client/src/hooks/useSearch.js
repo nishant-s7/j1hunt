@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import url from "../url";
 
 const useSearch = ({ pageNumber, name, filters }) => {
     const [loading, setLoading] = useState(true);
@@ -29,7 +30,7 @@ const useSearch = ({ pageNumber, name, filters }) => {
         formData.append("page", pageNumber);
 
         axios
-            .post("/api/restaurants", formData, {
+            .post(`${url}/restaurants`, formData, {
                 cancelToken: new axios.CancelToken((c) => (cancel = c)),
                 headers: { "Content-Type": "multipart/form-data" },
             })

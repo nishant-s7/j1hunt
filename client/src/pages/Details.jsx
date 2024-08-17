@@ -12,6 +12,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { GiMoneyStack } from "react-icons/gi";
 import "leaflet/dist/leaflet.css";
 import { ThreeDots } from "react-loader-spinner";
+import url from "../url";
 
 const Details = () => {
     const { id } = useParams();
@@ -20,7 +21,7 @@ const Details = () => {
 
     useEffect(() => {
         axios
-            .get(`/api/restaurant/${id}`)
+            .get(`${url}/restaurant/${id}`)
             .then((res) => {
                 setRestaurant(res.data);
                 setLoading(false);

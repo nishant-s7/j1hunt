@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
 import { useEffect, useState } from "react";
+import url from "../url";
 import { IoClose } from "react-icons/io5";
 
 const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
@@ -18,7 +19,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
 
     useEffect(() => {
         axios
-            .get("/api/countries")
+            .get(`${url}/countries`)
             .then((res) => {
                 setCountries(res.data);
             })
@@ -29,7 +30,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
 
     useEffect(() => {
         axios
-            .get("/api/cuisines")
+            .get(`${url}/cuisines`)
             .then((res) => {
                 setCuisines(res.data);
             })
