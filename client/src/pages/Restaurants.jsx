@@ -62,17 +62,17 @@ const Restaurants = () => {
 
     return (
         <div className="max-w-5xl mx-auto p-6">
-            <div className="flex flex-col md:flex-row gap-6 mb-6 items-center">
-                <img src="/logo.png" alt="logo" className="h-6" />
+            <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 mb-4 lg:mb-6 items-center">
+                <img src="/logo.png" alt="logo" className="h-6 lg:h-8" />
                 <input
-                    className="flex-1 border-2 border-gray-100 p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full lg:flex-1 border-2 border-gray-100 p-2 lg:p-3 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     type="text"
                     placeholder="Search restaurants by name"
                     onChange={handleSearch}
                 />
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 mt-2 lg:mt-0">
                     <FaLocationDot
-                        className={`h-6 w-6 transition-colors duration-300 ${
+                        className={`h-5 w-5 lg:h-6 lg:w-6 transition-colors duration-300 ${
                             !isGeolocationAvailable || !isGeolocationEnabled
                                 ? "text-red-500"
                                 : coords
@@ -82,21 +82,21 @@ const Restaurants = () => {
                     />
                     {!isGeolocationAvailable ||
                         (!isGeolocationEnabled && (
-                            <div className="text-red-500 text-xs w-20">
+                            <div className="text-red-500 text-xs md:text-sm w-20">
                                 Couldn&apos;t find you!
                             </div>
                         ))}
                     {coords && (
-                        <div className="text-orange-600 text-xs w-20">
+                        <div className="text-orange-600 text-xs md:text-sm w-20">
                             Found you!
                         </div>
                     )}
                 </div>
             </div>
-            <div className="mb-6 flex gap-6">
+            <div className="mb-4 md:mb-6 flex flex-row gap-4 md:gap-6 flex-wrap">
                 <button
                     onClick={openModal}
-                    className="px-4 py-2 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-500 transition-colors flex items-center gap-2"
+                    className="px-4 py-2 bg-orange-600 text-white rounded-lg shadow-md hover:bg-orange-500 transition-colors flex items-center gap-2 w-fit"
                 >
                     <BsFilterRight />
                     Filters
@@ -104,7 +104,7 @@ const Restaurants = () => {
                 {filters && (
                     <button
                         onClick={handleClearFilters}
-                        className="px-4 py-2 text-orange-600 border-2 border-orange-600 rounded-lg shadow-md hover:border-orange-400 hover:text-orange-400 transition-colors flex gap-2 items-center"
+                        className="px-4 py-2 text-orange-600 border-2 border-orange-600 rounded-lg shadow-md hover:border-orange-400 hover:text-orange-400 transition-colors flex gap-2 items-center w-fit"
                     >
                         Clear Filters
                         <IoClose />
@@ -119,7 +119,7 @@ const Restaurants = () => {
                     setPageNumber={setPageNumber}
                 />
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {!loading && restaurants.length === 0 ? (
                     <div>No restaurants found</div>
                 ) : (
@@ -144,7 +144,7 @@ const Restaurants = () => {
                     )
                 )}
             </div>
-            <div className="mt-6 flex justify-center w-[64rem]">
+            <div className="mt-4 lg:mt-6 flex justify-center w-full lg:w-[64rem]">
                 {loading && !error && (
                     <ThreeDots color="#ea580c" height={50} width={50} />
                 )}

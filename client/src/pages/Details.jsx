@@ -13,35 +13,14 @@ import { GiMoneyStack } from "react-icons/gi";
 import "leaflet/dist/leaflet.css";
 import { ThreeDots } from "react-loader-spinner";
 
-const images = [
-    "/car1.jpg",
-    "/car2.jpg",
-    "/car3.jpg",
-    "/car4.jpg",
-    "/car5.jpg",
-    "/car6.jpg",
-    "/car7.jpg",
-    "/car8.jpg",
-    "/car9.jpg",
-    "/car10.jpg",
-    "/car11.jpg",
-    "/car12.jpg",
-    "/car13.jpg",
-    "/car14.jpg",
-    "/car15.jpg",
-];
-
 const Details = () => {
     const { id } = useParams();
     const [restaurant, setRestaurant] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const randomImageIndex = Math.floor(Math.random() * images.length);
-    const imageUrl = images[randomImageIndex];
-
     useEffect(() => {
         axios
-            .get(`http://localhost:3000/restaurant/${id}`)
+            .get(`/api/restaurant/${id}`)
             .then((res) => {
                 setRestaurant(res.data);
                 setLoading(false);
@@ -62,25 +41,27 @@ const Details = () => {
                 <>
                     <div className="bg-white rounded-lg h-64 shadow-md space-y-6 transition-transform transform hover:scale-[1.02]">
                         <img
-                            src={imageUrl}
+                            src={restaurant?.image}
                             alt="bg"
                             className="w-full h-full object-cover rounded-lg"
                         />
                     </div>
 
                     <div className="bg-white rounded-lg shadow-md p-8 space-y-6 transition-transform transform hover:scale-[1.02]">
-                        <div className="flex items-center justify-between">
-                            <h1 className="text-4xl font-bold text-gray-800">
+                        <div className="flex items-center justify-between gap-2">
+                            <h1 className="text-2xl sm:text-4xl font-bold text-gray-800">
                                 {restaurant?.restaurant_name}
                             </h1>
-                            <div className="flex items-center gap-2">
+                            <div className="flex gap-2">
                                 <FaStar className="text-yellow-500 text-xl" />
-                                <span className="text-lg font-semibold text-gray-700">
-                                    {restaurant?.aggregate_rating} / 5
-                                </span>
-                                <span className="text-gray-500 text-sm">
-                                    ({restaurant?.votes} votes)
-                                </span>
+                                <div className="flex flex-col gap-1">
+                                    <span className="text-sm sm:text-lg font-semibold text-gray-700">
+                                        {restaurant?.aggregate_rating} / 5
+                                    </span>
+                                    <span className="text-gray-500 text-xs sm:text-sm">
+                                        ({restaurant?.votes} votes)
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -95,7 +76,7 @@ const Details = () => {
                                     </span>
                                 ))}
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700 text-lg">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700 text-sm sm:text-lg">
                             <div className="flex items-center">
                                 <FaLocationDot className="text-red-500 mr-3 text-3xl" />
                                 <span>
@@ -157,21 +138,36 @@ const Details = () => {
                                 </span>
                             </div>
                         </div>
-                        <div className="flex justify-between items-center pt-6 border-t">
-                            <div className="text-sm text-gray-600">
-                                Price Range:{" "}
-                                {Array(restaurant?.price_range)
-                                    .fill()
-                                    .map((_, i) => (
-                                        <GiMoneyStack
-                                            key={i}
-                                            className="inline-block text-green-500 text-lg"
-                                        />
-                                    ))}
+                        <div className="flex justify-between items-center pt-6 border-t gap-10">
+                            <div className="sm:flex text-sm text-gray-600 hidden gap-2">
+                                <span>Price Range:</span>
+                                <div>
+                                    {Array(restaurant?.price_range)
+                                        .fill()
+                                        .map((_, i) => (
+                                            <GiMoneyStack
+                                                key={i}
+                                                className="inline-block text-green-500 text-xl"
+                                            />
+                                        ))}
+                                </div>
                             </div>
-                            <div className="text-lg text-gray-700 font-semibold">
+                            <div className="sm:text-lg text-gray-700 font-semibold">
                                 Rating:{" "}
-                                <span className="px-2 py-1 rounded-full text-white bg-blue-600">
+                                <span
+                                    className="px-2 py-1 rounded-full text-white"
+                                    style={{
+                                        backgroundColor:
+                                            restaurant?.rating_color,
+                                        color:
+                                            restaurant?.rating_color ===
+                                                "#FFFF00" ||
+                                            restaurant?.rating_color ===
+                                                "#FFFFFF"
+                                                ? "black"
+                                                : "white",
+                                    }}
+                                >
                                     {restaurant?.rating_text}
                                 </span>
                             </div>

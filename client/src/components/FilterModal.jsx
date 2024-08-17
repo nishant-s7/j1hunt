@@ -18,7 +18,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/countries")
+            .get("/api/countries")
             .then((res) => {
                 setCountries(res.data);
             })
@@ -29,7 +29,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/cuisines")
+            .get("/api/cuisines")
             .then((res) => {
                 setCuisines(res.data);
             })
@@ -75,8 +75,8 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-lg w-[600px] relative">
-                <div className="text-2xl flex justify-between items-center p-4 border-b-2">
+            <div className="bg-white rounded-lg shadow-lg w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl relative">
+                <div className="text-xl md:text-2xl flex justify-between items-center p-3 md:p-4 border-b-2">
                     <h2 className="font-semibold">Filters</h2>
                     <button
                         onClick={closeModal}
@@ -86,14 +86,14 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                     </button>
                 </div>
                 <form onSubmit={handleApplyFilters}>
-                    <div className="flex">
-                        <div className="w-1/4">
+                    <div className="flex flex-col md:flex-row">
+                        <div className="w-full md:w-1/4">
                             <ul className="bg-gray-100">
                                 <li>
                                     <button
                                         onClick={() => setActiveTab("country")}
                                         type="button"
-                                        className={`w-full text-left p-4 ${
+                                        className={`w-full text-left p-3 md:p-4 ${
                                             activeTab === "country"
                                                 ? "bg-white text-black border-l-4 border-orange-600"
                                                 : "text-gray-700 hover:text-black"
@@ -106,7 +106,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                                     <button
                                         onClick={() => setActiveTab("cuisine")}
                                         type="button"
-                                        className={`w-full text-left p-4 ${
+                                        className={`w-full text-left p-3 md:p-4 ${
                                             activeTab === "cuisine"
                                                 ? "bg-white text-black border-l-4 border-orange-600"
                                                 : "text-gray-700 hover:text-black"
@@ -119,7 +119,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                                     <button
                                         onClick={() => setActiveTab("spend")}
                                         type="button"
-                                        className={`w-full text-left p-4 ${
+                                        className={`w-full text-left p-3 md:p-4 ${
                                             activeTab === "spend"
                                                 ? "bg-white text-black border-l-4 border-orange-600"
                                                 : "text-gray-700 hover:text-black"
@@ -134,7 +134,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                                             setActiveTab("imgsearch")
                                         }
                                         type="button"
-                                        className={`w-full text-left p-4 ${
+                                        className={`w-full text-left p-3 md:p-4 ${
                                             activeTab === "imgsearch"
                                                 ? "bg-white text-black border-l-4 border-orange-600"
                                                 : "text-gray-700 hover:text-black"
@@ -147,7 +147,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                                     <button
                                         onClick={() => setActiveTab("nearby")}
                                         type="button"
-                                        className={`w-full text-left p-4 ${
+                                        className={`w-full text-left p-3 md:p-4 ${
                                             activeTab === "nearby"
                                                 ? "bg-white text-black border-l-4 border-orange-600"
                                                 : "text-gray-700 hover:text-black"
@@ -163,7 +163,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="w-3/4 p-6">
+                        <div className="w-full md:w-3/4 p-4 md:p-6">
                             <div className="space-y-4">
                                 {activeTab === "nearby" && (
                                     <div>
@@ -183,7 +183,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                                 {activeTab === "country" && (
                                     <div>
                                         <select
-                                            className="w-full border border-gray-300 rounded-lg py-3 px-2 bg-white"
+                                            className="w-full border border-gray-300 rounded-lg py-2 md:py-3 px-2 bg-white"
                                             value={country}
                                             onChange={(e) =>
                                                 setCountry(e.target.value)
@@ -206,7 +206,7 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                                 {activeTab === "cuisine" && (
                                     <div>
                                         <select
-                                            className="w-full border border-gray-300 rounded-lg py-3 px-2 bg-white"
+                                            className="w-full border border-gray-300 rounded-lg py-2 md:py-3 px-2 bg-white"
                                             value={cuisine}
                                             onChange={(e) =>
                                                 setCuisine(e.target.value)
@@ -296,13 +296,13 @@ const FilterModal = ({ closeModal, coords, setFilters, setPageNumber }) => {
                         <button
                             onClick={closeModal}
                             type="button"
-                            className="px-4 py-2 bg-gray-300 hover:bg-gray-200 text-gray-700 rounded-lg"
+                            className="px-3 md:px-4 py-2 bg-gray-300 hover:bg-gray-200 text-gray-700 rounded-lg"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-500"
+                            className="px-3 md:px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-500"
                         >
                             Apply Filters
                         </button>

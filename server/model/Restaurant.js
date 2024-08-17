@@ -26,6 +26,7 @@ const restaurantSchema = new Schema({
     rating_color: String,
     rating_text: String,
     votes: Number,
+    image: String,
 });
 
 module.exports = mongoose.model("Restaurant", restaurantSchema);

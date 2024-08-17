@@ -29,7 +29,7 @@ const useSearch = ({ pageNumber, name, filters }) => {
         formData.append("page", pageNumber);
 
         axios
-            .post("http://localhost:3000/restaurants", formData, {
+            .post("/api/restaurants", formData, {
                 cancelToken: new axios.CancelToken((c) => (cancel = c)),
                 headers: { "Content-Type": "multipart/form-data" },
             })
