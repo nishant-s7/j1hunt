@@ -9,6 +9,7 @@ export default defineConfig({
             "/api": {
                 target: "https://j1hunt.onrender.com",
                 changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, ""),
             },
         },
     },
